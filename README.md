@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+> This license only applies files on this repository. Other files of this project aren't distributed.\
+> Check the 'Abstract' and 'Open Source' part.
 
 # RICA
   
