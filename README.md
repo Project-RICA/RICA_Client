@@ -21,7 +21,7 @@ And also the quality of comment is a big problem. It makes other viewers feel un
 To prohibit this, google is using their AI to figure out what is the bad comment, but in Korean, its results look not good.\
 Because of Korean Language's complexity, of course it shows lower performance than that in English analyzing.\
 Many content uploaders suffering by many insults.\
-The solution is make more powerful, automated comment manager.\\
+The solution is make more powerful, automated comment manager.
 
 ### About open-source policy
 It could be hard to open main source code to the public, because this is not completly perfect AI.\
