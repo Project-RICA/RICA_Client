@@ -25,7 +25,7 @@ It could be hard to open main source code to the public, because this is not com
 If comment writers who can understand this code spread the principle of operation, some of writers would write comment that RICA cannot catch.\
 It means someone can use vulnerable part viciously.\
 So except contributors, the main source code will not upload to here.\
-If you want source code for education, public usage, or wnat to join as a contributor, please submit this [Google Form]()\
+If you want source code for education, public usage, or wnat to join as a contributor, please submit this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf6HtJSLUeD-HPErs-TCQXS96EDYWow1qciISIiXQIloPRrww/viewform?usp=sf_link)\
 It takes about 1~3 days. We will try to reply to you within a week at the latest.
 
 ---
