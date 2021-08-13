@@ -21,7 +21,9 @@ And also the quality of comment is a big problem. It makes other viewers feel un
 To prohibit this, google is using their AI to figure out what is the bad comment, but in Korean, its results look not good.\
 Because of Korean Language's complexity, of course it shows lower performance than that in English analyzing.\
 Many content uploaders suffering by many insults.\
-The solution is make more powerful, automated comment manager.
+The solution is make more powerful, automated comment manager.\
+But over time, it's accuracy would be decreased.\
+To prvent this, RICA will keep learning itself, and get some feedbacks from developers regularly.
 
 ### About open-source policy
 It could be hard to open main source code to the public, because this is not completly perfect AI.\
@@ -92,6 +94,19 @@ RICA operates with two engine.
     - Pronunciation Converter
     - Shape Converter (Pattern Type / AI Type)
     ``` 
+    
+- ### Preprocessor
+  Because we need flow of context and positive level, we cannot consider interjection, mimetic words, and onomatopoeia as 'Stopword'.\
+  Just copying stopwords and pasting them isn't a good solution.\
+  So, RICA needs a unique preprocessing mechanism for itself.
+
+  - #### Kind of Processing
+    ```
+    - 
+    ```
+
+
+
 
 ---
 ## 
