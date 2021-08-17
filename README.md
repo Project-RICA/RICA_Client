@@ -83,6 +83,10 @@ RICA operates with two engine.
     
     - ^^|발
     => ^^|
+    
+    - h++ps://h0st.address.컴
+    
+    - 안?녕?하?세?요?
     ```
   - #### Functions
     GoogleTranslation seems that they also using the pronunciation.\
