@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 > __This license applies only to _code files_ on this repository.__ Other files of this project aren't distributed.\
-> Check the 'Abstract' and 'Open Source' part.
+> Check the 'Abstract' and 'Open Source Policy' part.
 
 # RICA
   
@@ -25,7 +25,7 @@ The solution is make more powerful, automated comment manager.\
 But over time, it's accuracy would be decreased.\
 To prvent this, RICA will keep learning itself, and get some feedbacks from developers regularly.
 
-### About open-source policy
+### About open source policy
 It could be hard to open main source code to the public, because this is not completly perfect AI.\
 If comment writers who can understand this code spread the principle of operation, some of writers would write comment that RICA cannot catch.\
 It means someone can use vulnerable part viciously.\
@@ -37,7 +37,7 @@ It takes about 1~3 days. We will try to reply to you within a week at the latest
 ## Structure
 RICA operates with two engine.
 
-- ### Normal Engine
+- ### RICA Engine
   - #### Feature Class
     RICA check the intensity of each feature to apprehend comment writer's intention.
     ```
@@ -53,17 +53,17 @@ RICA operates with two engine.
   - #### Learning
     This engine use []
 
-  - #### Operation
+  - #### Operation Sequence
     RICA extracts the value of each features in this sequence :
     ```
     Obfuscation -> [Trick Engine] Converting -> Positive -> Formalness -> Criticism & Blame
     ```
-    If Obfuscation level is not 0, Trick Engine convert it to normal sentence.
+    If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
 
 
 - ### Trick Engine
   - #### Applicable Comment Type
-    Some examples will let you know what type of comment correspond to this.
+    Some examples will let you know what type of comment is appropriate to be handled in this.
     ```
     * The => sign means translated sentence.
 
@@ -84,19 +84,25 @@ RICA operates with two engine.
     - ^^|발
     => ^^|
     
-    - h++ps://h0st.address.컴
+    - h티티ps://h0st.address.컴
     
-    - 안?녕?하?세?요?
+    - 안?녕?하?세?요? (The comment mosaiced by using special ascii code)
     ```
+    Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.
+    That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine
+    RICA will save some comment that it cannot interpret to request analyze about new type of comment.
+    So other tricks not written in here will be updated later when RICA found it.
+    
   - #### Functions
-    GoogleTranslation seems that they also using the pronunciation.\
+    GoogleTranslation seems that they also using the pronunciation when they translate sentences.\
     So they could answer correctly in some words.\
-    Also they have databases about newly coined words and slangs. (e.g. '멋졍' translated to 'cool')\
-    But it is the part of word too, it should handle by normal engine.\
+    Also they have databases about newly coined words and slangs. (e.g. '멋졍' translated to 'cool', 'ㅇㅇ' to 'Yep')\
+    But it is the part of word too, it should handle by RICA engine.\
     Now we can know what we need.
     ```
     - Pronunciation Converter
-    - Shape Converter (Pattern Type / AI Type)
+    - Shape Converter (Pattern / AI Analyzation)
+    - Keyboard language Converter (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
 - ### Preprocessor
@@ -106,10 +112,12 @@ RICA operates with two engine.
 
   - #### Kind of Processing
     ```
+    - Replace (Some part of common stopwords)
     - 
     ```
 
-
+- ### Realtime Learning System
+  Realtime learning is the most important part of RICA becuase of continuously changing comment types.
 
 
 ---
