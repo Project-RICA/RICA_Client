@@ -85,6 +85,8 @@ RICA operates with two engine.
     => ^^|
     
     - h티티ps://h0st.address.컴
+
+    - ㅋㅋ ㅏ ㅋㄴ 토 옼 = yousu쓰리8삼
     
     - 안?녕?하?세?요? (The comment mosaiced by using special ascii code)
     ```
