@@ -89,6 +89,13 @@ RICA operates with two engine.
     - ㅋㅋ ㅏ ㅋㄴ 토 옼 = yousu쓰리8삼
     
     - 안?녕?하?세?요? (The comment mosaiced by using special ascii code)
+
+    -병진아, 너 뭐하니?
+     신나게 놀고 있는데?
+     씨앗은 다 모으고 놀고 있는거지?
+     발전기 옆 상자에 놔뒀어. 많이 모아놨으니까 걱정말라고.
+     녀석, 고맙다
+     
     ```
     Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.
     That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine
