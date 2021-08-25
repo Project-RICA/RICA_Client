@@ -97,11 +97,11 @@ RICA operates with two engine.
      녀석, 고맙다
      
     ```
-    Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.
-    That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine
-    RICA will save some comment that it cannot interpret to request analyze about new type of comment.
-    So other tricks not written in here will be updated later when RICA found it.
-    Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.
+    Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.\
+    That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine.\
+    RICA will save some comment that it cannot interpret to request analyze about new type of comment.\
+    So other tricks not written in here will be updated later when RICA found it.\
+    Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.\
     For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.
     
   - #### Functions
