@@ -100,20 +100,21 @@ RICA operates with two engine.
     Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.\
     That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine.\
     RICA will save some comment that it cannot interpret to request analyze about new type of comment.\
-    So other tricks not written in here will be updated later when RICA found it.\
-    Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.\
-    For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.
+    So other tricks not written in here will be updated later when RICA found it.
     
   - #### Functions
-    GoogleTranslation seems that they also using the pronunciation when they translate sentences.\
+    Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.\
+    For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.\
+    In this occasion, GoogleTranslation's system may help us to analyze the tricks..
+    It seems that they also using the pronunciation when they translate sentences.\
     So they could answer correctly in some words.\
     Also they have databases about newly coined words and slangs. (e.g. '멋졍' translated to 'cool', 'ㅇㅇ' to 'Yep')\
     But it is the part of word too, it should handle by RICA engine.\
     Now we can know what we need.
     ```
-    - Pronunciation Converter
-    - Shape Converter (Pattern / AI Analyzation)
-    - Keyboard language Converter (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
+    - Pronunciation Converter (Matching with dict values -> RNN)
+    - Shape Converter (CNN)
+    - Keyboard language Converter (Matching with dict values) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
 - ### Preprocessor
