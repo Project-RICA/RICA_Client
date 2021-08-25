@@ -48,10 +48,10 @@ RICA operates with two engine.
     - Formalness : words, end of sentence
     ```
     Higher value means the comment contains that feature.\
-    RICA learn with this feature values.\
+    RICA learn with this feature values.
 
   - #### Learning
-    This engine use []
+    This engine use RNN. (And also it can learn data in __realtime__)
 
   - #### Operation Sequence
     RICA extracts the value of each features in this sequence :
@@ -101,6 +101,8 @@ RICA operates with two engine.
     That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine
     RICA will save some comment that it cannot interpret to request analyze about new type of comment.
     So other tricks not written in here will be updated later when RICA found it.
+    Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.
+    For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.
     
   - #### Functions
     GoogleTranslation seems that they also using the pronunciation when they translate sentences.\
