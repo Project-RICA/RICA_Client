@@ -19,17 +19,17 @@ Made by ForestHouse
 Nowadays, various type of comment is being used to help content viewers communicate with each other.\
 And also the quality of comment is a big problem. It makes other viewers feel unpleasantness.\
 To prohibit this, google is using their AI to figure out what is the bad comment, but in Korean, its results look not good.\
-Because of Korean Language's complexity, of course it shows lower performance than that in English analyzing.\
-Many content uploaders suffering by many insults.\
+Because of Korean Language's complexity, it shows lower performance than that in English analyzing.\
+Many content uploaders suffering by many insults included in the comments.\
 The solution is make more powerful, automated comment manager.\
-But over time, it's accuracy would be decreased.\
+But over time, it's accuracy would be decreased because users try to bypass this system and many words are newly coined in realtime.\
 To prvent this, RICA will keep learning itself, and get some feedbacks from developers regularly.
 
 ### About open source policy
-It could be hard to open main source code to the public, because this is not completly perfect AI.\
+It could be hard to open main source code to the public, because this is not a completly perfect AI.\
 If comment writers who can understand this code spread the principle of operation, some of writers would write comment that RICA cannot catch.\
-It means someone can use vulnerable part viciously.\
-So except contributors, the main source code will not upload to here.\
+It means someone can viciously use vulnerable part of RICA.\
+So except contributors, the main source code will not be uploaded to here.\
 If you want source code for education, public usage, or wnat to join as a contributor, please submit this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf6HtJSLUeD-HPErs-TCQXS96EDYWow1qciISIiXQIloPRrww/viewform?usp=sf_link)\
 It takes about 1~3 days. We will try to reply to you within a week at the latest.
 
@@ -37,31 +37,33 @@ It takes about 1~3 days. We will try to reply to you within a week at the latest
 ## Structure
 RICA operates with two engine.
 
-- ### RICA Engine
+- ### ⚙ RICA Engine
   - #### Feature Class
     RICA check the intensity of each feature to apprehend comment writer's intention.
     ```
     - Positive ( <-> Negative ) : words, conjunctions, flow of context
     - Criticism : words
     - Blame : words
+    - Advertisement : words, flow of context, __Obfuscation__
     - Obfuscation : words construction and organization, complexity of consonant and vowel compound
     - Formalness : words, end of sentence
     ```
     Higher value means the comment contains that feature.\
-    RICA learn with this feature values.
-
-  - #### Learning
-    This engine use RNN. (And also it can learn data in __realtime__)
+    RICA learn with this feature values. Each values range 0 to 100.\
+    If negative features' value is bigger than the critical point, RICA will be take an action.
 
   - #### Operation Sequence
     RICA extracts the value of each features in this sequence :
     ```
-    Obfuscation -> [Trick Engine] Converting -> Positive -> Formalness -> Criticism & Blame
+    Obfuscation -> [Trick Engine] Converting -> Positive -> Formalness -> Criticism & Blame -> Advertisement
     ```
     If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
 
+  - #### Learning
+    This engine use RNN. (And also it can learn data in __realtime__)
 
-- ### Trick Engine
+
+- ### ⚙ Trick Engine
   - #### Applicable Comment Type
     Some examples will let you know what type of comment is appropriate to be handled in this.
     ```
@@ -117,7 +119,7 @@ RICA operates with two engine.
     - Keyboard language Converter (Matching with dict values) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
-- ### Preprocessor
+- ### ✂ Preprocessor
   Because we need flow of context and positive level, we cannot consider interjection, mimetic words, and onomatopoeia as 'Stopword'.\
   Just copying stopwords and pasting them isn't a good solution.\
   So, RICA needs a unique preprocessing mechanism for itself.
@@ -128,7 +130,7 @@ RICA operates with two engine.
     - 
     ```
 
-- ### Realtime Learning System
+- ### 📝 Realtime Learning System
   Realtime learning is the most important part of RICA becuase of continuously changing comment types.
 
 
