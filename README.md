@@ -101,7 +101,13 @@ RICA operates with two engine.
      신나게 놀고 있는데?
      씨앗은 다 모으고 놀고 있는거지?
      발전기 옆 상자에 놔뒀어. 많이 모아놨으니까 걱정말라고.
-     녀석, 고맙다
+     고맙다. 분배는 1/3 콜?
+     로떼마트에 팔아서 가져가는 수수료보다 더 크네
+     세상 물정 모르는 놈일세, 씨앗만 모아놓고 뭘 더 바라는겨
+     끼니 챙길 정도는 줘야하는거 아님? 끼니 3번은 국룰이지
+     임마 그럼 니가 다 키워서 마트 가서 직접 팔아라.
+     ㄹㅇ?
+     ㅇㅇ
      
     ```
     Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.\
