@@ -108,7 +108,6 @@ RICA operates with two engine.
      임마 그럼 니가 다 키워서 마트 가서 직접 팔아라.
      ㄹㅇ?
      ㅇㅇ
-     
     ```
     Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.\
     That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine.
