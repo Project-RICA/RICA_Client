@@ -153,7 +153,9 @@ RICA operates with two engine.
 
 
 ---
-## 💬 Comments
+## 💬 Usage
+This part shows you where RICA can exert its power, and contains the guide of the initial setting per each place.
+
   - ### ▶ YouTube
     There is two options to make a queue of new comments.\
     \
@@ -165,6 +167,11 @@ RICA operates with two engine.
     \
     The latter will be better than the former, but it can look like a censorship.\
     So we recommend you to select the former one.
+    
+  - ### 🎮 Discord
+    _RICA bot will start to be developed after the first YouTube version of RICA successfully works there._\
+    _And also RICA need DB before analyzing the various chat in Discord channel. Normal talks are much complex to do it._
+    _Comming Soon!_
     
   - ### (Will be added)
 
