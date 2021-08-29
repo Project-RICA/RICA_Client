@@ -2,7 +2,7 @@
 > __This license applies only to _code files_ on this repository.__ Other files of this project aren't distributed.\
 > Check the 'Abstract' and 'Open Source Policy' part.
 
-# 🐋 RICA
+# 🌊 RICA 🐳
   
 
 <img src="/Document/RICA%20Logo.png" width="100" height="100" align="left">
