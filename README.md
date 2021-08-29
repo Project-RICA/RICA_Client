@@ -168,8 +168,8 @@ RICA operates with two engine.
 - [KoNLPy](https://github.com/konlpy/konlpy)\
   Notice : KoNLPy adopted GPL3.0 license, but because this program's main module is not for distribution, RICA doesn't have to adopt this license.
 
-- [AI Hub](https://aihub.or.kr/)
+- [AI Hub](https://aihub.or.kr/)\
   Sentence Data
 
-- ~~[Everyone's Corpus](https://corpus.korean.go.kr/main.do)
-  Corpus Data~~
+- ~~[Everyone's Corpus](https://corpus.korean.go.kr/main.do)~~\
+  ~~Corpus Data~~
