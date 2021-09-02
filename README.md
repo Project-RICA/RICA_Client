@@ -62,7 +62,7 @@ RICA operates with two engine.
     If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
 
   - #### Learning
-    This engine use RNN. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
+    This engine use LSTM. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
     All initial data should be preprocessed via devs.\
     The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
     And later, most learning will be automatically executed by RLS, devs often checking it.
@@ -129,13 +129,13 @@ RICA operates with two engine.
     
 - ### ✂ Preprocessor
   Because we need flow of context and positive level, we cannot consider interjection, mimetic words, and onomatopoeia as 'Stopword'.\
-  Just copying stopwords and pasting them isn't a good solution.\
+  Just copying stopwords from web pages and pasting them isn't a good solution.\
   So, RICA needs a unique preprocessing mechanism for itself.
 
   - #### Kind of Processing
     ```
-    - Replace (Some part of common stopwords)
-    - 
+    - Split & Replace (Some part of common stopwords)
+    - ===============================================================================================================Delete this.
     ```
 
 - ### 📝 Realtime Learning System (RLS)
