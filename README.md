@@ -69,7 +69,27 @@ RICA operates with two engine.
     \
     The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
     Each features have each neural networks. And some features affected by preceding feature.\
-    (e.g. Criticism value is decided by words and [Formalness] value.)
+    (e.g. Criticism value is decided by words and [Formalness] value.)\
+    So we should train networks following the Operation Sequence.
+    The method of each features' train :
+    ```
+    Obfuscation : Normal(0) <-> Weird Sentence(100)
+    
+    Positive : Negative Sentence(0) <-> Positive(Declarative) Sentence(100)
+    
+    Happiness : Angry(0) <-> Normal(50) <-> Happy(100)
+    
+    Formalness : Informal(0) <-> Formal(100)
+    
+    Criticism : Balme(0) <-> Normal(50) <-> Criticism(100)
+    
+    Sexuality : Normal(0) <-> Sexual Sentence(100)
+    
+    Advertisement : Normal(0) <-> Advertisement(100)
+    ```
+    For example, when dev train Obfuscation model, the train sentences' features except Obfuscation must not be same to be flexible.
+    If dev gives only formal, positive, non-AD sentences to that model, it could be vulnerable to informal, negative, AD sentences.
+    And to achieve this goal(flexibility), we need various data, or this Obfuscation model's criteria will not be Obfuscation but another thing.
 
 
 - ### ⚙ Trick Engine
