@@ -41,31 +41,35 @@ RICA operates with two engine.
   - #### Feature Class
     RICA check the intensity of each feature to apprehend comment writer's intention.
     ```
+    - Obfuscation : words construction and organization, complexity of consonant and vowel compound
     - Positive <-> Negative : words(± type, x(weight) type), conjunctions, flow of context
     - Happiness <-> Anger : words(± type, x(weight) type)
-    - Criticism : words
-    - Blame : words
-    - Advertisement : words, flow of context, [Obfuscation]
-    - Obfuscation : words construction and organization, complexity of consonant and vowel compound
     - Formalness : words, end of sentence
+    - Criticism <-> Blame : words, [Formalness]
+    - Sexuality : words
+    - Advertisement : words, flow of context, [Obfuscation]
     ```
     Higher value means the comment contains that feature.\
     RICA learn with this feature values. Each values range 0 to 100.\
     (In the Positive and Happiness features, the neutral value is 50.)\
-    If negative features' value is bigger than the critical point(Might be change continuously), RICA will be take an action.
+    If negative features' value is bigger than the critical point(Might be change continuously), RICA will take an action.
 
   - #### Operation Sequence
     RICA extracts the value of each features in this sequence :
     ```
-    Obfuscation -> [Trick Engine] Converting -> Positive -> Happiness -> Formalness -> Criticism & Blame -> Advertisement
+    Obfuscation -> [Trick Engine] -> Positive -> Happiness -> Formalness -> Criticism -> Sexuality -> Advertisement
     ```
-    If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
+    (* *[Trick Engine] activates when Obfuscation > Crit.Point*)\
+    If Obfuscation level is bigger than critical point, like negative features' value, sentences will be sent to Trick Engine and converted to normal sentence RICA can understand.
 
   - #### Learning
     This engine use LSTM. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
     All initial data should be preprocessed via devs.\
+    And later, most learning will be automatically executed by RLS, devs often checking it.\
+    \
     The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
-    And later, most learning will be automatically executed by RLS, devs often checking it.
+    Each features have each neural networks. And some features affected by preceding feature.\
+    (e.g. Criticism value is decided by words and [Formalness] value.)
 
 
 - ### ⚙ Trick Engine
