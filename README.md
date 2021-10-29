@@ -60,7 +60,8 @@ RICA operates with two engine.
     Obfuscation -> [Trick Engine] -> Positive -> Happiness -> Formalness -> Criticism -> Sexuality -> Advertisement
     ```
     (* *[Trick Engine] activates when Obfuscation > Crit.Point*)\
-    If Obfuscation level is bigger than critical point, like negative features' value, sentences will be sent to Trick Engine and converted to normal sentence RICA can understand.
+    If Obfuscation level is bigger than critical point, like negative features' value, sentences will be sent to Trick Engine and converted to normal sentence RICA can understand.\
+    And if that level is much bigger than critical point, [Inference based Pre-Block System] will immediately concider the comment as a kind of garbage.
 
   - #### Learning
     This engine use LSTM. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
@@ -148,7 +149,7 @@ RICA operates with two engine.
     ```
     - Pronunciation Converter (Matching with dict values -> RNN, Google Translation)
     - Shape Converter (CNN)
-    - Keyboard language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
+    - Keyboard Language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
 - ### ✂ Preprocessor
