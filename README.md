@@ -2,6 +2,7 @@
 > __This license applies only to _code files_ on this repository.__ Other files of this project aren't distributed.\
 > Check the 'Abstract' and 'Open Source Policy' part.
 
+> Updated Date : 2021/12/08 v.s
 # 🌊 RICA 🐳
   
 
@@ -29,8 +30,8 @@ To prvent this, RICA will keep learning itself, and get some feedbacks from deve
 It could be hard to open main source code to the public, because this is not a completly perfect AI.\
 If comment writers who can understand this code spread the principle of operation, some of writers would write comment that RICA cannot catch.\
 It means someone can viciously use vulnerable part of RICA.\
-So except contributors, the main source code will not be gone public and uploaded to here.\
-If you want source code for education, public usage, or wnat to join as a contributor, please submit this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf6HtJSLUeD-HPErs-TCQXS96EDYWow1qciISIiXQIloPRrww/viewform?usp=sf_link)\
+So except contributors and providers, the main source code will not be gone public and uploaded to here.\
+If you want source code for education, public usage, or want to join as a contributor, please submit this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf6HtJSLUeD-HPErs-TCQXS96EDYWow1qciISIiXQIloPRrww/viewform?usp=sf_link)\
 It takes about 1~3 days. We will try to reply to you within a week at the latest.
 
 ---
