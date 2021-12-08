@@ -1,10 +1,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-> __This license applies only to _code files_ on this repository.__ Other files of this project aren't distributed.\
-> Check the 'Abstract' and 'Open Source Policy' part.
+> __MIT 라이센스는 _이 레포지토리에 있는 코드_에만 적용됩니다..__ 이 프로젝트의 다른 파일들은 배포되지 않습니다.\
+> 전체 파일에 대한 배포는 'Abstract' 및 'Open Source Policy' 부분을 참고해주세요.
 
-> Updated Date : 2021/12/08 v.s
+> README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.
+> 가장 최신 버전의 README를 보시려면 원본을 참고해주시기 바랍니다.
+> README_KR Updated Date : 2021/12/08 v.beta1
+
 # 🌊 RICA 🐳
-  
+
 
 <img src="/Document/RICA%20Logo.png" width="100" height="100" align="left">
 
@@ -17,22 +20,22 @@ Made by ForestHouse
 
 ---
 ## 🧾 Abstract
-Nowadays, various type of comment is being used to help content viewers communicate with each other.\
-And also the quality of comment is a big problem. It makes other viewers feel unpleasantness.\
-To prohibit this, google is using their AI to figure out what is the bad comment, but in Korean, its results look not good.\
-Because of Korean Language's complexity, it shows lower performance than that in English analyzing.\
-Many content uploaders suffering by many insults included in the comments.\
-The solution is make more powerful, automated comment manager.\
-But over time, it's accuracy would be decreased because users try to bypass this system and many words are newly coined in realtime.\
-To prvent this, RICA will keep learning itself, and get some feedbacks from developers regularly.
+요즘에는, 매우 많은 형태의 댓글들이 콘텐츠 시청자 상호간의 소통을 위해 사용되고 있습니다.
+그리고 댓글의 질 또한 큰 문제로써 대두되고 있습니다. 그것들은 다른 시청자들을 불쾌하게 만듭니다.
+이것을 방지하고자, Google사는 그들의 AI를 이용하여 어떤 게 악성 댓글인지 찾아내고자 하지만, 한국어에서는 그것의 결과가 그리 좋지 않아보입니다.
+한국어의 복잡성 때문에, 그 AI가 한국어를 분석할 때는 영어를 분석할 때 보다 낮은 성능을 보여줍니다.
+많은 콘텐츠 창작자들이 댓글에 포함된 수많은 욕설들에 의해 고통받고 있습니다.
+해결책은 더 강력하고, 자동화된 댓글 관리 시스템을 만드는 것입니다.
+하지만 시간이 흐름에 따라, 유저들이 분석 시스템을 회피하려 들 것이고 실시간으로 생겨나는 신조어 때문에 이 시스템의 정확도는 낮아질 것입니다.
+그래서 RICA는 스스로 학습을 계속할 것이고 주기적으로 개발자들로부터 피드백을 받을 것입니다.
 
 ### About open source policy
-It could be hard to open main source code to the public, because this is not a completly perfect AI.\
-If comment writers who can understand this code spread the principle of operation, some of writers would write comment that RICA cannot catch.\
-It means someone can viciously use vulnerable part of RICA.\
-So except contributors and providers, the main source code will not be gone public and uploaded to here.\
-If you want source code for education, public usage, or want to join as a contributor, please submit this [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf6HtJSLUeD-HPErs-TCQXS96EDYWow1qciISIiXQIloPRrww/viewform?usp=sf_link)\
-It takes about 1~3 days. We will try to reply to you within a week at the latest.
+RICA의 메인 소스코드를 공개하는 것은 힘들 것 같습니다. 완벽한 AI가 아니기 때문이죠.
+만일 댓글을 작성하는 사람들 중 이 코드를 이해할 수 있는 사람이 작동 원리를 퍼뜨려 버린다면, 몇몇 댓글 작성자는 RICA가 감지할 수 없는 방식으로 댓글을 작성하려 들 것입니다.
+즉 누군가가 RICA의 취약점을 악의적으로 이용할 수 있다는 것이죠.
+그러므로 Contributors와 Providers를 제외하고, 메인 코드는 대중에게 공개되지 않으며 이곳에 업로드되지 않습니다.
+만약 코드를 교육적/공적 목적으로 이용하고 싶으시거나 Contributor로서 프로젝트에 참여하고자 한다면 이 [설문지](https://docs.google.com/forms/d/e/1FAIpQLScpYl2XCLTufoG6TLIWVuHwA3G7Wn_CtMxDw9WqPMusE3Fx7w/viewform?usp=sf_link)를 작성해주세요.
+응답까지 약 1~3일 걸립니다. 늦어도 1주 이내에는 답장을 드리도록 하겠습니다.
 
 ---
 ## 🧱 Structure
@@ -42,56 +45,31 @@ RICA operates with two engine.
   - #### Feature Class
     RICA check the intensity of each feature to apprehend comment writer's intention.
     ```
-    - Obfuscation : words construction and organization, complexity of consonant and vowel compound
     - Positive <-> Negative : words(± type, x(weight) type), conjunctions, flow of context
     - Happiness <-> Anger : words(± type, x(weight) type)
-    - Formalness : words, end of sentence
-    - Criticism <-> Blame : words, [Formalness]
-    - Sexuality : words
+    - Criticism : words
+    - Blame : words
     - Advertisement : words, flow of context, [Obfuscation]
+    - Obfuscation : words construction and organization, complexity of consonant and vowel compound
+    - Formalness : words, end of sentence
     ```
     Higher value means the comment contains that feature.\
     RICA learn with this feature values. Each values range 0 to 100.\
     (In the Positive and Happiness features, the neutral value is 50.)\
-    If negative features' value is bigger than the critical point(Might be change continuously), RICA will take an action.
+    If negative features' value is bigger than the critical point(Might be change continuously), RICA will be take an action.
 
   - #### Operation Sequence
     RICA extracts the value of each features in this sequence :
     ```
-    Obfuscation -> [Trick Engine] -> Positive -> Happiness -> Formalness -> Criticism -> Sexuality -> Advertisement
+    Obfuscation -> [Trick Engine] Converting -> Positive -> Happiness -> Formalness -> Criticism & Blame -> Advertisement
     ```
-    (* *[Trick Engine] activates when Obfuscation > Crit.Point*)\
-    If Obfuscation level is bigger than critical point, like negative features' value, sentences will be sent to Trick Engine and converted to normal sentence RICA can understand.\
-    And if that level is much bigger than critical point, [Inference based Pre-Block System] will immediately concider the comment as a kind of garbage.
+    If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
 
   - #### Learning
-    This engine use LSTM. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
+    This engine use RNN. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
     All initial data should be preprocessed via devs.\
-    And later, most learning will be automatically executed by RLS, devs often checking it.\
-    \
     The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
-    Each features have each neural networks. And some features affected by preceding feature.\
-    (e.g. Criticism value is decided by words and [Formalness] value.)\
-    So we should train networks following the Operation Sequence.
-    The method of each features' train :
-    ```
-    Obfuscation : Normal(0) <-> Weird Sentence(100)
-    
-    Positive : Negative Sentence(0) <-> Positive(Declarative) Sentence(100)
-    
-    Happiness : Angry(0) <-> Normal(50) <-> Happy(100)
-    
-    Formalness : Informal(0) <-> Formal(100)
-    
-    Criticism : Balme(0) <-> Normal(50) <-> Criticism(100)
-    
-    Sexuality : Normal(0) <-> Sexual Sentence(100)
-    
-    Advertisement : Normal(0) <-> Advertisement(100)
-    ```
-    For example, when dev train Obfuscation model, the train sentences' features except Obfuscation must not be same to be flexible.
-    If dev gives only formal, positive, non-AD sentences to that model, it could be vulnerable to informal, negative, AD sentences.
-    And to achieve this goal(flexibility), we need various data, or this Obfuscation model's criteria will not be Obfuscation but another thing.
+    And later, most learning will be automatically executed by RLS, devs often checking it.
 
 
 - ### ⚙ Trick Engine
@@ -150,18 +128,18 @@ RICA operates with two engine.
     ```
     - Pronunciation Converter (Matching with dict values -> RNN, Google Translation)
     - Shape Converter (CNN)
-    - Keyboard Language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
+    - Keyboard language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
 - ### ✂ Preprocessor
   Because we need flow of context and positive level, we cannot consider interjection, mimetic words, and onomatopoeia as 'Stopword'.\
-  Just copying stopwords from web pages and pasting them isn't a good solution.\
+  Just copying stopwords and pasting them isn't a good solution.\
   So, RICA needs a unique preprocessing mechanism for itself.
 
   - #### Kind of Processing
     ```
-    - Split & Replace (Some part of common stopwords)
-    - ===============================================================================================================Delete this.
+    - Replace (Some part of common stopwords)
+    - 
     ```
 
 - ### 📝 Realtime Learning System (RLS)
