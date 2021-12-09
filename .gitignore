@@ -1,3 +1,5 @@
 .idea
 driver.zip
 chromedriver.exe
+*.rdat
+debugChrome.bat

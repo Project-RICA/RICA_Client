@@ -1,3 +1,4 @@
+import os.path
 import time
 import zipfile
 
@@ -32,3 +33,13 @@ def uncompress(path):
     with zipfile.ZipFile(path) as zf:
         zf.extractall()
         print("Uncompress succeed")
+
+
+def open_file(path):
+
+    pass
+
+
+def get_abspath():  # return like [A:\...\(current folder]
+    return os.path.abspath(__file__).replace("\\utils.py", '')
+
