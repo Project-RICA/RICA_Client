@@ -4,7 +4,7 @@
 
 > README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.\
 > 가장 최신 버전의 README를 보시려면 원본 또는 ReadMe-Modifying브랜치의 ReadMe를 참고해주시기 바랍니다.\
-> README_KR Updated Date : 2021/12/08 v.beta1
+> README_KR Updated Date : 2021/12/09 v.beta1
 
 # 🌊 RICA 🐳
 
