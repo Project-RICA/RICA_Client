@@ -71,7 +71,7 @@ RICA operates with two engine.
     \
     The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
     Each features have each neural networks. And some features affected by preceding feature.\
-    (e.g. Criticism value is decided by words and [Formalness] value.)\
+    (e.g. Criticism value is decided with words and [Formalness] value.)\
     So we should train networks following the Operation Sequence.
     The method of each features' train :
     ```
