@@ -2,8 +2,8 @@
 > __MIT 라이센스는 _이 레포지토리에 있는 코드_에만 적용됩니다..__ 이 프로젝트의 다른 파일들은 배포되지 않습니다.\
 > 전체 파일에 대한 배포는 'Abstract' 및 'Open Source Policy' 부분을 참고해주세요.
 
-> README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.
-> 가장 최신 버전의 README를 보시려면 원본을 참고해주시기 바랍니다.
+> README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.\
+> 가장 최신 버전의 README를 보시려면 원본 또는 ReadMe-Modifying브랜치의 ReadMe를 참고해주시기 바랍니다.\
 > README_KR Updated Date : 2021/12/08 v.beta1
 
 # 🌊 RICA 🐳
@@ -39,11 +39,11 @@ RICA의 메인 소스코드를 공개하는 것은 힘들 것 같습니다. 완�
 
 ---
 ## 🧱 Structure
-RICA operates with two engine.
+RICA는 두 엔진을 가지고 있습니다.
 
 - ### ⚙ RICA Engine
   - #### Feature Class
-    RICA check the intensity of each feature to apprehend comment writer's intention.
+    RICA는 각 특성들의 강도를 측정하여 댓글 작성자의 의도를 파악합니다.
     ```
     - Positive <-> Negative : words(± type, x(weight) type), conjunctions, flow of context
     - Happiness <-> Anger : words(± type, x(weight) type)
@@ -53,23 +53,47 @@ RICA operates with two engine.
     - Obfuscation : words construction and organization, complexity of consonant and vowel compound
     - Formalness : words, end of sentence
     ```
-    Higher value means the comment contains that feature.\
-    RICA learn with this feature values. Each values range 0 to 100.\
-    (In the Positive and Happiness features, the neutral value is 50.)\
-    If negative features' value is bigger than the critical point(Might be change continuously), RICA will be take an action.
+    높은 수치는 댓글이 해당 특성을 더 많이 포함하고 있다는 것을 의미합니다.\
+    RICA는 이 특성 수치들을 통해 학습합니다. 각각의 수치는 0부터 100까지의 범위를 가집니다.\
+    만일 부정적인 특성들의 수치가 임계값보다 높을 경우 RICA는 해당 댓글에 대해 조치를 취할 것입니다. (임계값은 지속적으로 바뀔 수 있습니다.)
 
   - #### Operation Sequence
-    RICA extracts the value of each features in this sequence :
+    RICA는 아래 처리순서에 따라 각 특성들의 수치를 뽑아냅니다.
     ```
     Obfuscation -> [Trick Engine] Converting -> Positive -> Happiness -> Formalness -> Criticism & Blame -> Advertisement
     ```
-    If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
+    (* [Trick Engine] 은 *난독성 수치 > 임계값* 일 때에만 동작합니다.)\
+    만약 난독성 수치가 임계값보다 크다면, 부정적인 수치들 처럼, 문장(댓글)은 Trick Engine으로 보내지고 RICA가 해석할 수 있는 형태로 변환됩니다.\
+    그리고 만약 난독성 수치가 임계값보다 지나치게 높다면, [추론 기반 사전 차단 시스템]이 즉시 해당 댓글을 불필요한 댓글로 간주할 것입니다.
 
   - #### Learning
-    This engine use RNN. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
-    All initial data should be preprocessed via devs.\
-    The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
-    And later, most learning will be automatically executed by RLS, devs often checking it.
+    이 엔진은 LSTM 모델을 사용합니다. (또한 실시간 학습 역시 가능합니다. 'RICA Engine RLS'를 확인하세요.)\
+    모든 초기 데이터는 개발자들에 의해 전처리 과정을 거쳐야만 합니다.\
+    그리고 후에, RLS에 의해 대부분의 학습은 자동적으로 시행될 것이며 개발자는 종종 이것을 검토할 것입니다.\
+    \
+    학습 방식은 스팸메일 분류기와 비슷합니다. 문장을 모으고 각 특성 수치를 할당하고 집어넣죠.
+    각 특성은 각각의 신경망을 가집니다. 그리고 몇몇 특성들은 선행하는 특성으로부터 영향을 받습니다.
+    (e.g. 비판 특성의 수치는 단어와 격식 특성의 수치를 통해 결정됩니다.)
+    그래서 다음 작업 순서에 따라 신경망을 학습해야만 합니다.
+    각 특성들의 학습 방법 :
+    ```
+    Obfuscation : Normal(0) <-> Weird Sentence(100)
+    
+    Positive : Negative Sentence(0) <-> Positive(Declarative) Sentence(100)
+    
+    Happiness : Angry(0) <-> Normal(50) <-> Happy(100)
+    
+    Formalness : Informal(0) <-> Formal(100)
+    
+    Criticism : Blame(0) <-> Normal(50) <-> Criticism(100)
+    
+    Sexuality : Normal(0) <-> Sexual Sentence(100)
+    
+    Advertisement : Normal(0) <-> Advertisement(100)
+    ```
+    예를 들어, 개발자가 난독 모델을 학습시킬 때, 모델의 유연성을 위해 난독 특성을 제외한 학습 문장들의 특성들은 같지 않아야만 합니다.
+    만약 개발자가 난독 모델에게 격식적이고, 광고가 아닌 평서문만을 준다면, 난독 모델은 비격식체와 부정문, 그리고 광고성 문장들에 취약해집니다.
+    그리고 모델을 유연하게(융통성있게) 하기 위해서는 다양한 데이터가 필요합니다. 그렇지 않으면 이 난독 모델의 판단 기준은 난독성 척도가 아니라 다른 특성이 될 겁니다.
 
 
 - ### ⚙ Trick Engine
@@ -128,18 +152,18 @@ RICA operates with two engine.
     ```
     - Pronunciation Converter (Matching with dict values -> RNN, Google Translation)
     - Shape Converter (CNN)
-    - Keyboard language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
+    - Keyboard Language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
 - ### ✂ Preprocessor
   Because we need flow of context and positive level, we cannot consider interjection, mimetic words, and onomatopoeia as 'Stopword'.\
-  Just copying stopwords and pasting them isn't a good solution.\
+  Just copying stopwords from web pages and pasting them isn't a good solution.\
   So, RICA needs a unique preprocessing mechanism for itself.
 
   - #### Kind of Processing
     ```
-    - Replace (Some part of common stopwords)
-    - 
+    - Split & Replace (Some part of common stopwords)
+    - ===============================================================================================================Delete this.
     ```
 
 - ### 📝 Realtime Learning System (RLS)
