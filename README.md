@@ -2,7 +2,7 @@
 > __This license applies only to _code files_ on this repository.__ Other files of this project aren't distributed.\
 > Check the 'Abstract' and 'Open Source Policy' part.
 
-> Updated Date : 2021/12/08 v.s
+> Updated Date : 2021/12/09 v.fix
 # 🌊 RICA 🐳
   
 
@@ -50,7 +50,7 @@ RICA operates with two engine.
     - Sexuality : words
     - Advertisement : words, flow of context, [Obfuscation]
     ```
-    Higher value means the comment contains that feature.\
+    Higher value means the comment contains that feature more.\
     RICA learn with this feature values. Each values range 0 to 100.\
     (In the Positive and Happiness features, the neutral value is 50.)\
     If negative features' value is bigger than the critical point(Might be change continuously), RICA will take an action.
