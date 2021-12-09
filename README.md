@@ -83,7 +83,7 @@ RICA operates with two engine.
     
     Formalness : Informal(0) <-> Formal(100)
     
-    Criticism : Balme(0) <-> Normal(50) <-> Criticism(100)
+    Criticism : Blame(0) <-> Normal(50) <-> Criticism(100)
     
     Sexuality : Normal(0) <-> Sexual Sentence(100)
     
