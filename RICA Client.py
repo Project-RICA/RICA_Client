@@ -11,23 +11,23 @@ import Updater
 from AccountManager import RICAAccount
 import utils
 
-print(requests.get("https://chromedriver.storage.googleapis.com/LATEST_RELEASE_97").text)
 
-
+# Initialization
 print("RICA Client\nVersion : beta 0.0")
 print("Checking new version. . .")
 Updater.check_update()
 print("Checking latest model. . .")
 Updater.check_latest_model()
 print("Checking client data. . .")
-account = RICAAccount()
-account.check_rdat()
-
+RICAAccount.check_rdat()
 
 print("Done")
 utils.sleep(1)
-
 utils.cls()
+
+
+
+
 utils.double_line()
 print("RICA - Realtime Improving Comment Analyzer")
 print("Please select option\n")
@@ -48,7 +48,6 @@ if opt == 0:
 elif opt == 1:
     try:  # Type all codes in try-catch to execute gc.bat at the end of process.
         Crawler_YouTube.init_selenium()
-        Crawler_YouTube.login()
     finally:
         os.startfile("gc.bat")
 elif opt == 1234:

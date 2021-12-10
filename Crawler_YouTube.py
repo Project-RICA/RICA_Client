@@ -37,19 +37,6 @@ def init_selenium():
     initialized = True
 
 
-def login():
-    login_info = utils.open_file("./setting.rdat")
-    if user_data is None:
-        print("No user data file detected. Please write ID & PW")
-        utils.line()
-        print("! We highly recommend to use sub-account which is accessible only comment for your YouTube Channel's "
-              "security.")
-        utils.line()
-        ID = input("ID : ")
-        PW = input("PW : ")
-        print("Saving to ")
-
-
 def get_new_comment():
     if not initialized:
         raise AttributeError("Selenium should be initialized before using.")

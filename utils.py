@@ -35,9 +35,19 @@ def uncompress(path):
         print("Uncompress succeed")
 
 
-def open_file(path):
+def read_file(path):
+    temp = None
+    try:
+        with open(path, 'r') as f:
+            temp = f.read()
+    except FileNotFoundError:
+        return None
+    return temp
 
-    pass
+
+def is_file_exist(path):
+    return os.path.isfile(path)
+
 
 
 def get_abspath():  # return like [A:\...\(current folder]

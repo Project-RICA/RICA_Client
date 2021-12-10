@@ -1,23 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>RICA Introduction</title>
     <style>
-        .uppermostcontainer {
-            width:100%;
-            height:100%;
+        .uppermost_container {
+            width:calc(100%-4em);
+            height: 50em;
             display:flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            background: url("beach.jpg");
+            flex-direction: column;
+            background-image: url("beach.jpg");
+            padding: 1em 2em 2em 2em;
+        }
+        .flex_center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        div .inner_container {
+          width: calc(100% - 8em);
+          height: calc(100% - 3em);
+
+          padding: 2em;
+        }
+        div .white_blur {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        footer {
+          width: 100%;
+          height: 2em;
+          background-color: #7bdef2;
+          color: #bff6ff;
+        }
+        .layout_horizontal_side{
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-direction: row;
         }
     </style>
 </head>
 <body>
-    <div class=".uppermostcontainer">
-      <p>test</p>
+    <div class="uppermost_container">
+        <h1 style="width: calc(100% - 2em);">RICA Instruction</h1>
+      <div class="inner_container white_blur">
+          <p>Descriptions of functions :)
+              We recommend to use sub-account which is accessible only comment of videos for your YouTube Channel's security.
+              [INFO] Your login data will be remembered by Chrome. We don't collect any type of personal data.</p>
+      </div>
+
     </div>
-    <p></p>
+    <footer class="flex_center">
+      RICA Team
+    </footer>
 </body>
 </html>
