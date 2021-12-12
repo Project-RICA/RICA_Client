@@ -4,6 +4,8 @@ import zipfile
 
 import requests
 
+def log(string=''):
+    print(f"[{string}] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
 def sleep(t):
     time.sleep(t)
@@ -50,6 +52,6 @@ def is_file_exist(path):
 
 
 
-def get_abspath():  # return like [A:\...\(current folder]
+def get_abspath():  # return like [C:\...\(current folder)]
     return os.path.abspath(__file__).replace("\\utils.py", '')
 

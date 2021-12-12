@@ -3,3 +3,4 @@ driver.zip
 chromedriver.exe
 *.rdat
 debugChrome.bat
+test.py

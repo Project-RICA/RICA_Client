@@ -43,19 +43,20 @@ utils.double_line()
 opt = int(input("\nOption Number : "))
 utils.cls()
 
-if opt == 0:
+if opt == 0:  # Manual
     sentence = input("Please input the sentence to analyze : ")
-elif opt == 1:
+elif opt == 1:  # YouTube
     try:  # Type all codes in try-catch to execute gc.bat at the end of process.
         Crawler_YouTube.init_selenium()
     finally:
         os.startfile("gc.bat")
-elif opt == 1234:
+elif opt == 1234:  # Clear Data
     print("Before reset, please close all your Chrome.exe windows.")
     if input("Type \"Yes\" to reset. This task cannot be recovered (no undo)").lower == 'yes':
         os.startfile("gc.bat")
         os.remove("C:\\ChromeDebugENV")
         os.remove("chromedriver.exe")
+        os.remove("setting.rdat")
         print("Successfully deleted files.")
         utils.sleep(3)
         exit(0)

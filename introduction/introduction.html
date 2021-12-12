@@ -3,57 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <title>RICA Introduction</title>
-    <style>
-        .uppermost_container {
-            width:calc(100%-4em);
-            height: 50em;
-            display:flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-image: url("beach.jpg");
-            padding: 1em 2em 2em 2em;
-        }
-        .flex_center {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        div .inner_container {
-          width: calc(100% - 8em);
-          height: calc(100% - 3em);
-
-          padding: 2em;
-        }
-        div .white_blur {
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-        footer {
-          width: 100%;
-          height: 2em;
-          background-color: #7bdef2;
-          color: #bff6ff;
-        }
-        .layout_horizontal_side{
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          flex-direction: row;
-        }
-    </style>
 </head>
-<body>
-    <div class="uppermost_container">
-        <h1 style="width: calc(100% - 2em);">RICA Instruction</h1>
-      <div class="inner_container white_blur">
-          <p>Descriptions of functions :)
-              We recommend to use sub-account which is accessible only comment of videos for your YouTube Channel's security.
-              [INFO] Your login data will be remembered by Chrome. We don't collect any type of personal data.</p>
-      </div>
+<body class="body">
+    <!-- <div> -->
+        <h1 style="width: calc(100% - 2em); color:white;">RICA Instruction</h1>
+      <div class="inner_container blur">
+        <h1 style="font-size:40pt;">사용 설명 및 초기 셋팅 방법 <info style="font-size: 10pt; font-weight: normal;">ℹ️ 본 창은 구글 자동로그인이 설정되어있지 않은 경우에만 나타납니다.</info></h1>
+        <h1><strong>1.</strong> 먼저 구글 로그인을 진행해주세요.</h1>
+        <p>자동로그인이 되어있어야 앞으로 RICA가 실행될 때마다 자동으로 유튜브에 접속하여 작업을 시작할 수 있습니다.</p>
+        <p>그렇지 않으면 매번 로그인을 수동으로 하셔야 합니다 😩</p>
+        <p>구글에 로그인이 되어있는 것을 RICA가 확인하면 시작 시 바로 유튜브 창으로 넘어갑니다.
+          이후 모든 과정은 자동으로 진행됩니다.</p>
+        <a href="https://accounts.google.com/signin/v2/identifier?hl=ko" target="_blank" style="text-decoration: none; color: #00ff00; font-weight: bold;">구글 로그인 창으로 이동 ▶️</a>
 
+        <h1> <strong>2.</strong> 보안이 취약한 컴퓨터로 로그인 시 제한된 권한의 계정 사용을 추천합니다.</h1>
+        <p>독립적 환경의 크롬이어도 크롬이긴 하므로 보안 수준은 크롬과 비슷할 테지만 아래 ℹ️에 해당되지 않으시면 보안을 위해 채널 관리자 계정 대신 댓글관리자 역할을 가지고 있는 계정을 사용하세요.</p>
+        <info style="color: #00aaff;">ℹ️ 컴퓨터가 백신으로 단단히 무장했다거나 계정에 2단계 인증을 걸어놓으신 경우 관리자 계정으로 로그인해도 괜찮습니다.</info>
+
+        <h1> <strong>3.</strong> <emphasize>이 크롬은 여러분이 쓰시는 크롬과 독립된 환경에서 실행되는 크롬입니다.</emphasize> </h1>
+        <p>문제 해결을 위한 크롬설정 등은 현재 이 크롬으로 해주시기 바라며 본인이 기존에 쓰던 크롬에서 설정하는 것은 아무런 의미가 없습니다.</p>
+        <p><notice>원활한 크롬 제어를 위해 팝업 항상 허용 옵션을 켜주시기 바랍니다.</notice> 현재 개발을 팝업 모두 허용한 상태에서 진행하고 있기 때문에
+        Selenium 에서 JS로 보내는 "새창열기" 명령이 먹히지 않을 경우 문제가 생길 수도 있습니다.
+        안 킨다고 바로 문제가 생기는 것은 아니지만 추후에도 문제가 발생할 가능성이 있으니 처음 설정 시 설정해두시는 것을 추천드립니다.</p>
+        <info>ℹ️ 크롬의 보안정책 강화로 인하여 개발자가 직접 popup 옵션을 수정하는 것이 불가능 하기 때문에 유저가 직접 수정해야 하는 것입니다.</info>
+        <br>
+        <info style="color: #ff4444;">⚠️ RICA는 오직 독립적으로 실행되는 크롬에만 접근합니다.
+        만약 자신이 기존에 쓰고 있던 크롬이 열리는 등의 상황이 발생하면 즉시 프로그램을 종료하고 RICA 공식 GitHub에서 받은 파일이 맞는지 확인하세요.
+        계정 해킹의 위험이 있을 수도 있습니다. 😨</info>
+
+
+      <br><br><br><br><br>
+      <input style="height:1.5em; width:1.5em;" type="checkbox" id="check1" value="green">
+      <label for="check1">Google 로그인을 완료했습니다. <info style="color: #ff4444; font-size:10pt; font-weight:normal !important;">⚠️ 미완료시 에러발생</info> </label>
+      <br>
+      <input style="height:1.5em; width:1.5em;" type="checkbox" id="check2" value="green">
+      <label for="check2">RICA <a href="#" style="text-decoration:none; color:#55aaff; font-weight:bold;">Terms & Policy</a> 에 동의합니다.</label>
     </div>
+    <div class="inner_container flex_center blur" style="padding:0 0.5em 0.5em 0.5em !important; width: calc(100% - 1em); height:0;" id="alert_container">
+      <info style="color: orange; font-size:14pt; font-weight:normal !important; opacity: 0;" id="alert">⚠️ 모든 체크박스에 체크하세요</info>
+    </div>
+      <button type="button" name="button" class="default_button color_sethick" style="color: white;" onclick="btn(getElementById('check1').checked && getElementById('check2').checked);" id="start_rica" ready="false">RICA 시작하기</button>
+
+    <!-- </div> -->
     <footer class="flex_center">
       RICA Team
     </footer>
 </body>
+<style>
+    * { color : white;}
+
+    .body{
+        height: auto;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* background-image: url("beach.jpg"); */
+        padding: 1em 2em 2em 2em;
+
+        background: linear-gradient(-15deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        /* background-size: 400% 400%; */
+        animation: gradient 5s ease infinite;
+        /* height: 100vh; */
+    }
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+    .flex_center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .inner_container {
+      width: calc(100% - 4em);
+      height: auto;
+      padding: 2em;
+    }
+    .inner_container p, .inner_container > a {
+      font-size: 20pt;
+    }
+    .blur {
+        /* background-color: rgba(255, 255, 255, 0.7); */
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    footer {
+      margin-top: 2em;
+      width: 100%;
+      height: 2em;
+      background-color: rgba(0,0,0,0);
+      color: #bff6ff;
+      font-weight: bold;
+    }
+    .layout_horizontal_side{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+    }
+    strong {
+      font-weight: bold;
+      font-size: 40pt;
+    }
+    emphasize {
+      font-weight: bold;
+      color: #ff4444;
+    }
+    info, label, label > a {
+      font-size: 16pt;
+      transition: 0.5s;
+    }
+    notice {
+      color: orange;
+      font-weight: bold;
+    }
+    .default_button {
+      height: 4em;
+      width: 100%;
+      font-size: 22pt;
+      font-weight: bold;
+      border: 0;
+      white-space: nowrap;
+      transition: 0.3s;
+    }
+    .default_button:hover {
+      font-size: 30pt;
+    }
+    .color_sethick {
+      background: linear-gradient(to left, #23aeff, #d623ff)
+    }
+    input:checked + label , input:checked + label > a{
+      font-size: 20pt;
+      font-weight: bold;
+    }
+    input:checked + label {
+      color: #2cb724;
+    }
+    #alert, #alert_container {
+      transition: 0.3s;
+    }
+</style>
+<script type="text/javascript">
+
+  function btn(isChecked) {
+    if(isChecked) {
+      document.getElementById('start_rica').innerHTML = "시작하는 중..."
+      document.getElementById('start_rica').ready = true;
+    } else {
+      visible();
+      hidden();
+    }
+
+    function visible(){
+      setTimeout(() => {
+      document.getElementById('alert_container').style.height = '2em';
+      document.getElementById('alert').style.opacity = '1';
+      }, 0)
+    }
+    function hidden(){
+      setTimeout(() => {
+      document.getElementById('alert').style.opacity = '0';
+      document.getElementById('alert_container').style.height = '0';
+      }, 1000)
+    }
+  }
+</script>
 </html>
