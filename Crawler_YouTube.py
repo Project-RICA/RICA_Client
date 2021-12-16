@@ -24,7 +24,7 @@ def init_selenium():
     chrome_options.add_argument("disable-popup-blocking")
     chrome_options.add_argument("--disable-popup-blocking")
 
-    with open('debugChrome.bat', 'w') as f:  # Chrome debug mode files will located in [C:\ChromeDebugENV]
+    with open('debugChrome.bat', 'w') as f:  # Chrome debug mode files will be located in [C:\ChromeDebugENV]
         f.write(f"\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-port=9222 "
                 f"--user-data-dir=C:\\ChromeDebugENV")
         # print(f"chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\\ChromeDebugENV")
@@ -47,7 +47,7 @@ def init_selenium():
     try:
         driver.find_element(By.XPATH, '//*[@id="gb"]/div/div[2]/div[2]/div')
         print("Google login information checked")
-    except selenium.common.exceptions.NoSuchElementException:  # if need login
+    except selenium.common.exceptions.NoSuchElementException:  # If need login
         # Show instruction.html
         abspath = utils.get_abspath().replace('\\', '/')
         driver.get(f"file://{abspath}/introduction/introduction.html")
@@ -61,7 +61,17 @@ def init_selenium():
 
     # Connect to YouTube and prepare to get comments
     driver.get("https://www.youtube.com")
-    # TODO go to "my channel"
+    driver.find_element(By.XPATH, '//*[@id="avatar-btn"]').click()
+    for x in range(10):  # Wait for 10sec
+        try:
+            utils.sleep(1)
+            driver.get(driver.find_element(By.XPATH, '/html/body/ytd-app/ytd-popup-container/tp-yt-iron-dropdown/div/ytd-multi-page-menu-renderer/div[3]/div[1]/yt-multi-page-menu-section-renderer[1]/div[2]/ytd-compact-link-renderer[1]/a').get_property("href"))
+            break
+        except selenium.common.exceptions.NoSuchElementException:
+            continue
+    else:
+        raise Exception("Element waiting timeout")
+    driver.get(driver.current_url.replace('www.youtube', 'studio.youtube') + "/comments")
 
     global initialized
     initialized = True
