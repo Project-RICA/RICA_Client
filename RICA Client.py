@@ -8,6 +8,7 @@ import keyboard
 
 import AccountDataManager
 import Crawler_YouTube
+import Debug
 import Updater
 from AccountDataManager import RICAAccount
 import utils
@@ -41,7 +42,7 @@ print("1234. * CLEAR ENV & DRIVER *")
 utils.line(10)
 utils.double_line()
 
-opt = AccountDataManager.debug(AccountDataManager.SELECT_MENU_AUTOMATICALLY)  # debug
+opt = AccountDataManager.debug(Debug.SELECT_MENU_AUTOMATICALLY)  # debug
 if opt is False:  # Input option number manually
     opt = int(input("\nOption Number : "))
 utils.cls()

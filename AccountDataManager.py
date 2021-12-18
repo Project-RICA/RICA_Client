@@ -5,13 +5,13 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import auth
 
+import Debug
+
 
 def debug(opt):
     return RICAAccount.rdat["debug"][opt]
 
-# Constants for debugging
-SHOW_INTRODUCTION = "force_to_show_introduction"
-SELECT_MENU_AUTOMATICALLY = "select_menu_automatically_at_startup"
+
 
 
 
@@ -48,8 +48,8 @@ class RICAAccount:
                     "restore_bad_comment": False
                     },
                 "debug": {
-                    SHOW_INTRODUCTION: False,
-                    SELECT_MENU_AUTOMATICALLY: False
+                    Debug.SHOW_INTRODUCTION: False,
+                    Debug.SELECT_MENU_AUTOMATICALLY: False
                     }
             }
             json.dump(cls.rdat, f, indent=4)

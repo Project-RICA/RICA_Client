@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 import AccountDataManager
-from AccountDataManager import RICAAccount
+import Debug
 import Updater
 import utils
 
@@ -47,7 +47,7 @@ def init_selenium():
     # Check Google account state
     driver.get("https://www.google.com")
     try:
-        if AccountDataManager.debug(AccountDataManager.SHOW_INTRODUCTION):  # Debug
+        if AccountDataManager.debug(Debug.SHOW_INTRODUCTION):  # Debug
             raise selenium.common.exceptions.NoSuchElementException
         driver.find_element(By.XPATH, '//*[@id="gb"]/div/div[2]/div[2]/div')
         print("Google login information checked")
