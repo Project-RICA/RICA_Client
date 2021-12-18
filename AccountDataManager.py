@@ -1,6 +1,28 @@
 import os
 import json
 import utils
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import auth
+
+
+def debug(opt):
+    return RICAAccount.rdat["debug"][opt]
+
+# Constants for debugging
+SHOW_INTRODUCTION = "force_to_show_introduction"
+SELECT_MENU_AUTOMATICALLY = "select_menu_automatically_at_startup"
+
+
+
+
+
+class FireBase:
+    @classmethod
+    def connect(cls):
+        default_app = firebase_admin.initialize_app()
+        cred = credentials.RefreshToken('path/to/refreshToken.json')
+        default_app = firebase_admin.initialize_app(cred)
 
 
 class RICAAccount:
@@ -24,9 +46,13 @@ class RICAAccount:
                 "client_setting": {
                     "showed_instruction": False,
                     "restore_bad_comment": False
-                }
+                    },
+                "debug": {
+                    SHOW_INTRODUCTION: False,
+                    SELECT_MENU_AUTOMATICALLY: False
+                    }
             }
-            json.dump(cls.rdat, f)
+            json.dump(cls.rdat, f, indent=4)
             print("Generated .rdat")
 
     @classmethod
@@ -72,6 +98,17 @@ class RICAAccount:
 
 
 
+
+
+
 class DiscordAccount:
     pass
+
+
+
+
+
+
+
+
 

@@ -6,7 +6,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
-import AccountManager
+import AccountDataManager
+from AccountDataManager import RICAAccount
 import Updater
 import utils
 
@@ -45,12 +46,14 @@ def init_selenium():
     # Check Google account state
     driver.get("https://www.google.com")
     try:
+        if AccountDataManager.debug(AccountDataManager.SHOW_INTRODUCTION):  # Debug
+            raise selenium.common.exceptions.NoSuchElementException
         driver.find_element(By.XPATH, '//*[@id="gb"]/div/div[2]/div[2]/div')
         print("Google login information checked")
-    except selenium.common.exceptions.NoSuchElementException:  # If need login
+    except selenium.common.exceptions.NoSuchElementException and Exception:  # If user needs login
         # Show instruction.html
         abspath = utils.get_abspath().replace('\\', '/')
-        driver.get(f"file://{abspath}/introduction/introduction.html")
+        driver.get(f"file://{abspath}/UI/introduction.html")
 
         start_button = driver.find_element(By.XPATH, "/html/body/button")
         while True:
