@@ -42,7 +42,7 @@ print("1234. * CLEAR ENV & DRIVER *")
 utils.line(10)
 utils.double_line()
 
-opt = AccountDataManager.debug(Debug.SELECT_MENU_AUTOMATICALLY)  # debug
+opt = Debug.debug(Debug.SELECT_MENU_AUTOMATICALLY)  # debug
 if opt is False:  # Input option number manually
     opt = int(input("\nOption Number : "))
 utils.cls()

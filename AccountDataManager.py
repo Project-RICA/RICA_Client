@@ -3,18 +3,8 @@ import json
 import utils
 import firebase_admin
 from firebase_admin import credentials
-from firebase_admin import auth
 
 import Debug
-
-
-def debug(opt):
-    return RICAAccount.rdat["debug"][opt]
-
-
-
-
-
 
 
 class FireBase:

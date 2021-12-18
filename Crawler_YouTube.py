@@ -47,7 +47,7 @@ def init_selenium():
     # Check Google account state
     driver.get("https://www.google.com")
     try:
-        if AccountDataManager.debug(Debug.SHOW_INTRODUCTION):  # Debug
+        if Debug.debug(Debug.SHOW_INTRODUCTION):  # Debug
             raise selenium.common.exceptions.NoSuchElementException
         driver.find_element(By.XPATH, '//*[@id="gb"]/div/div[2]/div[2]/div')
         print("Google login information checked")
