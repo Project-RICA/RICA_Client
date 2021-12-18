@@ -1,4 +1,5 @@
 import os
+import this
 
 import selenium.common.exceptions
 from selenium import webdriver
@@ -50,17 +51,18 @@ def init_selenium():
             raise selenium.common.exceptions.NoSuchElementException
         driver.find_element(By.XPATH, '//*[@id="gb"]/div/div[2]/div[2]/div')
         print("Google login information checked")
-    except selenium.common.exceptions.NoSuchElementException and Exception:  # If user needs login
+    except selenium.common.exceptions.NoSuchElementException:  # If user needs login
         # Show instruction.html
         abspath = utils.get_abspath().replace('\\', '/')
         driver.get(f"file://{abspath}/UI/introduction.html")
 
         start_button = driver.find_element(By.XPATH, "/html/body/button")
-        while True:
-            if start_button.get_property("ready"):  # if ready attribute is 'true' then escape loop
-                break
-            else:
-                utils.sleep(1)
+
+        def data():
+            return start_button.get_property("ready")  # if ready attribute is 'true' then escape loop
+        utils.wait(data, True, tick=1)
+
+
 
     # Connect to YouTube and prepare to get comments
     driver.get("https://www.youtube.com")
