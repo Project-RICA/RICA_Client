@@ -13,7 +13,7 @@ def trace(func):  # Use this tracer like : @utils.trace
         result = func(*args, **kwargs)
         print(f"DEBUG : Return {func.__name__}{args, kwargs} -> {result}")
         return result
-    return wrapper()
+    return wrapper
 
 def log(string=''):
     print(f"[{string}] >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
