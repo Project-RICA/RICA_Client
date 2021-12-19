@@ -4,7 +4,7 @@
 
 > README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.\
 > 가장 최신 버전의 README를 보시려면 원본 또는 ReadMe-Modifying브랜치의 ReadMe를 참고해주시기 바랍니다.\
-> README_KR Updated Date : 2021/12/09 v.beta1
+> README_KR Updated Date : 2021/12/19 v.beta1
 
 # 🌊 RICA 🐳
 
@@ -71,10 +71,10 @@ RICA는 두 엔진을 가지고 있습니다.
     모든 초기 데이터는 개발자들에 의해 전처리 과정을 거쳐야만 합니다.\
     그리고 후에, RLS에 의해 대부분의 학습은 자동적으로 시행될 것이며 개발자는 종종 이것을 검토할 것입니다.\
     \
-    학습 방식은 스팸메일 분류기와 비슷합니다. 문장을 모으고 각 특성 수치를 할당하고 집어넣죠.
-    각 특성은 각각의 신경망을 가집니다. 그리고 몇몇 특성들은 선행하는 특성으로부터 영향을 받습니다.
+    학습 방식은 스팸메일 분류기와 비슷합니다. 문장을 모으고 각 특성 수치를 할당하고 집어넣죠.\
+    각 특성은 각각의 신경망을 가집니다. 그리고 몇몇 특성들은 선행하는 특성으로부터 영향을 받습니다.\
     (e.g. 비판 특성의 수치는 단어와 격식 특성의 수치를 통해 결정됩니다.)
-    그래서 다음 작업 순서에 따라 신경망을 학습해야만 합니다.
+    그래서 다음 작업 순서에 따라 신경망을 학습해야만 합니다.\
     각 특성들의 학습 방법 :
     ```
     Obfuscation : Normal(0) <-> Weird Sentence(100)
@@ -91,14 +91,14 @@ RICA는 두 엔진을 가지고 있습니다.
     
     Advertisement : Normal(0) <-> Advertisement(100)
     ```
-    예를 들어, 개발자가 난독 모델을 학습시킬 때, 모델의 유연성을 위해 난독 특성을 제외한 학습 문장들의 특성들은 같지 않아야만 합니다.
-    만약 개발자가 난독 모델에게 격식적이고, 광고가 아닌 평서문만을 준다면, 난독 모델은 비격식체와 부정문, 그리고 광고성 문장들에 취약해집니다.
-    그리고 모델을 유연하게(융통성있게) 하기 위해서는 다양한 데이터가 필요합니다. 그렇지 않으면 이 난독 모델의 판단 기준은 난독성 척도가 아니라 다른 특성이 될 겁니다.
+    예를 들어, 개발자가 난독 모델을 학습시킬 때, 모델의 유연성을 위해 난독 특성을 제외한 학습 문장들의 특성들은 같지 않아야만 합니다.\
+    만약 개발자가 난독 모델에게 격식적이고, 광고가 아닌 평서문만을 준다면, 난독 모델은 비격식체와 부정문, 그리고 광고성 문장들에 취약해집니다.\
+    그리고 모델을 유연하게(융통성있게) 하기 위해서는 다양한 데이터가 필요합니다. 그렇지 않으면 이 난독 모델의 판단 기준은 난독성 척도가 아니라 다른 특성이 될 겁니다.\
 
 
 - ### ⚙ Trick Engine
   - #### Applicable Comment Type
-    Some examples will let you know what type of comment is appropriate to be handled in this.
+    몇 예시들이 어떤 댓글이 RICA에서 처리되기에 적합한지 이해하도록 도울 것입니다.
     ```
     * The => sign means translated sentence.
 
@@ -137,10 +137,11 @@ RICA는 두 엔진을 가지고 있습니다.
      ㄹㅇ?
      ㅇㅇ
     ```
-    Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.\
-    That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine.
+    Trick Engine은 이름 그대로 악성 사용자의 댓글을 막기 위해 각종 트릭들을 찾아냅니다.\
+    즉 일종의 인공지능 preprocessor입니다. 이 엔진은 RICA Engine에게 처리된 값을 반환합니다.
     
   - #### Functions
+    각 트릭에 대한 분석 정확도를 높이기 위해 Trick Engine은 여러 신경망으로 구성될 수 있습니다.\
     Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.\
     For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.\
     In this occasion, GoogleTranslation's system may help us to analyze the tricks..
