@@ -1,5 +1,4 @@
 import os
-import this
 
 import selenium.common.exceptions
 from selenium import webdriver

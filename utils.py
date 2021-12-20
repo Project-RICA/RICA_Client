@@ -9,9 +9,10 @@ import requests
 def trace(func):  # Use this tracer like : @utils.trace
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        print(f"DEBUG : Call {func.__name__}{args, kwargs}")
+        str_args = str(args)
+        print(f"DEBUG/TRACE : {func.__name__}({str_args[1:len(str_args)-2] if str_args != '()' else ''}{kwargs if kwargs != {} else ''})")
         result = func(*args, **kwargs)
-        print(f"DEBUG : Return {func.__name__}{args, kwargs} -> {result}")
+        print(f"DEBUG/TRACE : {func.__name__}({str_args[1:len(str_args)-2] if str_args != '()' else ''}{kwargs if kwargs != {} else ''}) return -> {result}")
         return result
     return wrapper
 
@@ -57,23 +58,18 @@ def is_file_exist(path):
 def get_abspath():  # return like [C:\...\(current folder)]
     return os.path.abspath(__file__).replace("\\utils.py", '')
 
-# def observe(obj, tick=0.1, *target):
-#     if target is None:  # Observe changes
-#         original = obj.run()
-#         while True:
-#             sleep(tick)
-#             if obj.run != original:
-#                 break
-#     else:  # If target is set, compare with target value
-#         while True:
-#             sleep(tick)
-#             if obj.run == target:
-#                 break
 
-@trace
-def wait(data, target, tick=0.1):
+# @trace
+def wait(data, target, tick=0.1, limit=-1, reverse_condition=False):
     while True:
-        if target == data():
+        if target == data() and not reverse_condition:
             break
+        elif target != data() and reverse_condition:
+            break
+
+        if limit != -1:
+            limit -= 1
+            if limit == 0:
+                raise Exception("Reached to maximum loop number")
         sleep(tick)
 

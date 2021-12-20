@@ -21,7 +21,7 @@ Updater.check_update()
 print("Checking latest model. . .")
 Updater.check_latest_model()
 print("Checking client data. . .")
-RICAAccount.check_rdat()
+RICAAccount.get_rdat()
 
 print("Done")
 utils.sleep(1)
