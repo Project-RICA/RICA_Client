@@ -248,8 +248,6 @@ class RICAAccount:
             break
         cls.update_rdat()  # Save to .rdat when editing is completed
 
-        # TODO login and synchronizing with firebase server.
-
 
 
 
