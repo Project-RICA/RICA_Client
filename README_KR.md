@@ -2,9 +2,9 @@
 > __MIT 라이센스는 _이 레포지토리에 있는 코드_에만 적용됩니다..__ 이 프로젝트의 다른 파일들은 배포되지 않습니다.\
 > 전체 파일에 대한 배포는 'Abstract' 및 'Open Source Policy' 부분을 참고해주세요.
 
-> README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.
-> 가장 최신 버전의 README를 보시려면 원본을 참고해주시기 바랍니다.
-> README_KR Updated Date : 2021/12/08 v.beta1
+> README_KR은 README에서 번역하는 방식으로 업데이트 됩니다.\
+> 가장 최신 버전의 README를 보시려면 원본 또는 ReadMe-Modifying브랜치의 ReadMe를 참고해주시기 바랍니다.\
+> README_KR Updated Date : 2021/12/20 v.s
 
 # 🌊 RICA 🐳
 
@@ -27,7 +27,7 @@ Made by ForestHouse
 많은 콘텐츠 창작자들이 댓글에 포함된 수많은 욕설들에 의해 고통받고 있습니다.\
 해결책은 더 강력하고, 자동화된 댓글 관리 시스템을 만드는 것입니다.\
 하지만 시간이 흐름에 따라, 유저들이 분석 시스템을 회피하려 들 것이고 실시간으로 생겨나는 신조어 때문에 이 시스템의 정확도는 낮아질 것입니다.\
-그래서 RICA는 스스로 학습을 계속할 것이고 주기적으로 개발자들로부터 피드백을 받을 것입니다.\
+그래서 RICA는 스스로 학습을 계속할 것이고 주기적으로 개발자들로부터 피드백을 받을 것입니다.
 
 ### About open source policy
 RICA의 메인 소스코드를 공개하는 것은 힘들 것 같습니다. 완벽한 AI가 아니기 때문이죠.\
@@ -39,11 +39,11 @@ RICA의 메인 소스코드를 공개하는 것은 힘들 것 같습니다. 완�
 
 ---
 ## 🧱 Structure
-RICA operates with two engine.
+RICA는 두 엔진을 가지고 있습니다.
 
 - ### ⚙ RICA Engine
   - #### Feature Class
-    RICA check the intensity of each feature to apprehend comment writer's intention.
+    RICA는 각 특성들의 강도를 측정하여 댓글 작성자의 의도를 파악합니다.
     ```
     - Positive <-> Negative : words(± type, x(weight) type), conjunctions, flow of context
     - Happiness <-> Anger : words(± type, x(weight) type)
@@ -53,28 +53,52 @@ RICA operates with two engine.
     - Obfuscation : words construction and organization, complexity of consonant and vowel compound
     - Formalness : words, end of sentence
     ```
-    Higher value means the comment contains that feature.\
-    RICA learn with this feature values. Each values range 0 to 100.\
-    (In the Positive and Happiness features, the neutral value is 50.)\
-    If negative features' value is bigger than the critical point(Might be change continuously), RICA will be take an action.
+    높은 수치는 댓글이 해당 특성을 더 많이 포함하고 있다는 것을 의미합니다.\
+    RICA는 이 특성 수치들을 통해 학습합니다. 각각의 수치는 0부터 100까지의 범위를 가집니다.\
+    만일 부정적인 특성들의 수치가 임계값보다 높을 경우 RICA는 해당 댓글에 대해 조치를 취할 것입니다. (임계값은 지속적으로 바뀔 수 있습니다.)
 
   - #### Operation Sequence
-    RICA extracts the value of each features in this sequence :
+    RICA는 아래 처리순서에 따라 각 특성들의 수치를 뽑아냅니다.
     ```
     Obfuscation -> [Trick Engine] Converting -> Positive -> Happiness -> Formalness -> Criticism & Blame -> Advertisement
     ```
-    If Obfuscation level is not 0, it will be sent to Trick Engine and converted to normal sentence RICA can understand.
+    (* [Trick Engine] 은 *난독성 수치 > 임계값* 일 때에만 동작합니다.)\
+    만약 난독성 수치가 임계값보다 크다면, 부정적인 수치들 처럼, 문장(댓글)은 Trick Engine으로 보내지고 RICA가 해석할 수 있는 형태로 변환됩니다.\
+    그리고 만약 난독성 수치가 임계값보다 지나치게 높다면, [추론 기반 사전 차단 시스템]이 즉시 해당 댓글을 불필요한 댓글로 간주할 것입니다.
 
   - #### Learning
-    This engine use RNN. (And also it can learn data in __realtime__. Check the 'RICA Engine RLS')\
-    All initial data should be preprocessed via devs.\
-    The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
-    And later, most learning will be automatically executed by RLS, devs often checking it.
+    이 엔진은 LSTM 모델을 사용합니다. (또한 실시간 학습 역시 가능합니다. 'RICA Engine RLS'를 확인하세요.)\
+    모든 초기 데이터는 개발자들에 의해 전처리 과정을 거쳐야만 합니다.\
+    그리고 후에, RLS에 의해 대부분의 학습은 자동적으로 시행될 것이며 개발자는 종종 이것을 검토할 것입니다.\
+    \
+    학습 방식은 스팸메일 분류기와 비슷합니다. 문장을 모으고 각 특성 수치를 할당하고 집어넣죠.\
+    각 특성은 각각의 신경망을 가집니다. 그리고 몇몇 특성들은 선행하는 특성으로부터 영향을 받습니다.\
+    (e.g. 비판 특성의 수치는 단어와 격식 특성의 수치를 통해 결정됩니다.)
+    그래서 다음 작업 순서에 따라 신경망을 학습해야만 합니다.\
+    각 특성들의 학습 방법 :
+    ```
+    Obfuscation : Normal(0) <-> Weird Sentence(100)
+    
+    Positive : Negative Sentence(0) <-> Positive(Declarative) Sentence(100)
+    
+    Happiness : Angry(0) <-> Normal(50) <-> Happy(100)
+    
+    Formalness : Informal(0) <-> Formal(100)
+    
+    Criticism : Blame(0) <-> Normal(50) <-> Criticism(100)
+    
+    Sexuality : Normal(0) <-> Sexual Sentence(100)
+    
+    Advertisement : Normal(0) <-> Advertisement(100)
+    ```
+    예를 들어, 개발자가 난독 모델을 학습시킬 때, 모델의 유연성을 위해 난독 특성을 제외한 학습 문장들의 특성들은 같지 않아야만 합니다.\
+    만약 개발자가 난독 모델에게 격식적이고, 광고가 아닌 평서문만을 준다면, 난독 모델은 비격식체와 부정문, 그리고 광고성 문장들에 취약해집니다.\
+    그리고 모델을 유연하게(융통성있게) 하기 위해서는 다양한 데이터가 필요합니다. 그렇지 않으면 이 난독 모델의 판단 기준은 난독성 척도가 아니라 다른 특성이 될 겁니다.
 
 
 - ### ⚙ Trick Engine
   - #### Applicable Comment Type
-    Some examples will let you know what type of comment is appropriate to be handled in this.
+    몇 예시들이 어떤 댓글이 RICA에서 처리되기에 적합한지 이해하도록 도울 것입니다.
     ```
     * The => sign means translated sentence.
 
@@ -113,36 +137,38 @@ RICA operates with two engine.
      ㄹㅇ?
      ㅇㅇ
     ```
-    Trick engine, as its name implies, finds tricks so that prevent vicious users' bad comment.\
-    That is, it's a kind of preprocessing engine using AI. This engine returns value to RICA Engine.
+    Trick Engine은 이름 그대로 악성 사용자의 댓글을 막기 위해 각종 트릭들을 찾아냅니다.\
+    즉 일종의 인공지능 preprocessor입니다. 이 엔진은 RICA Engine에게 처리된 값을 반환합니다.
     
   - #### Functions
-    Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.\
-    For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.\
-    In this occasion, GoogleTranslation's system may help us to analyze the tricks..
-    It seems that they also using the pronunciation when they translate sentences.\
-    So they could answer correctly in some words.\
-    Also they have databases about newly coined words and slangs. (e.g. '멋졍' translated to 'cool', 'ㅇㅇ' to 'Yep')\
-    But it is the part of word too, it should handle by RICA engine.\
-    Now we can know what we need.
+    각 트릭에 대한 분석 정확도를 높이기 위해 Trick Engine은 여러 신경망으로 구성될 수 있습니다.\
+    예를 들어, ^^|발 같은 문자는 CNN으로 처리하며, 28섀킈야 는 소리 RNN으로 처리하는 것이죠.\
+    이러한 경우, 구글번역의 시스템이 이 트릭들을 분석할 수 있도록 우리를 도울지도 모르겠습니다.\
+    그들은 또한 문장을 번역할 때 발음을 이용하는 것으로 보입니다.\
+    그러므로 구글번역기는 몇몇 단어를 정확하게 답할 수 있습니다.\
+    또한 신조어와 속어에 대한 데이터도 가지고 있습니다. (e.g. '멋졍' 은 'cool' 로 번역되며 'ㅇㅇ' 은 'yep'으로 번역됩니다.)\
+    하지만 이것 역시 단어의 한 부분일 뿐이므로 RICA Engine 에서 처리되어야 합니다.\
+    우리는 이제 무엇이 필요한지 알 수 있습니다.
     ```
     - Pronunciation Converter (Matching with dict values -> RNN, Google Translation)
     - Shape Converter (CNN)
-    - Keyboard language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
+    - Keyboard Language Converter (Google Translation, Googling) (e.g. '안녕'->'dkssud' , 'Hello'->'ㅗ디ㅣㅐ')
     ``` 
     
 - ### ✂ Preprocessor
-  Because we need flow of context and positive level, we cannot consider interjection, mimetic words, and onomatopoeia as 'Stopword'.\
-  Just copying stopwords and pasting them isn't a good solution.\
-  So, RICA needs a unique preprocessing mechanism for itself.
+  문맥의 흐름과 긍정성 척도가 필요하기 때문에 감탄사, 의태어, 의성어를 불용어로 취급할 수 없습니다.\
+  웹에서 불용어를 복사하고 붙이는 것은 좋은 방법이 아닙니다.\
+  그래서, RICA는 자신을 위한 특별한 선처리 방법이 필요합니다.
 
   - #### Kind of Processing
     ```
-    - Replace (Some part of common stopwords)
-    - 
+    - Split & Replace (Some part of common stopwords)
+    - ===============================================================================================================Delete this.
     ```
 
 - ### 📝 Realtime Learning System (RLS)
+  > 정식 출시 이전까지는 이하 내용의 한국어 버전을 제공하지 않습니다.
+  
   Realtime learning is the most important part of RICA becuase of continuously changing comment types\
   RLS will be triggered by some type of comments.
   For the accuracy of RLS and to prevent mishandling, they'll will be sent to devs.
