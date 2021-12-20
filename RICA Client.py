@@ -15,13 +15,14 @@ import utils
 
 
 # Initialization
-print("RICA Client\nVersion : beta 0.0")
+utils.double_line(40)
+print("\n\nRICA Client\nVersion : beta 0.0\n\n")
 print("Checking new version. . .")
 Updater.check_update()
 print("Checking latest model. . .")
 Updater.check_latest_model()
-print("Checking client data. . .")
-RICAAccount.get_rdat()
+print("Checking client data and login. . .")
+RICAAccount.login()
 
 print("Done")
 utils.sleep(1)

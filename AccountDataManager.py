@@ -7,20 +7,27 @@ import Debug
 
 class FireBase:
     # Initialize
-    BY_LOGIN = 'login'
-    BY_REGISTER = 'create_account'
+    BY_LOGIN = "login"
+    BY_REGISTER = "create_account"
+    # FireBase Auth response keys
+    ID_TOKEN = "idToken"
+    LOCAL_ID = "localId"
+    EMAIL = "email"
+    EXPIRE_TIME = "expiresIn"
     # Query
     CREATE_ACCOUNT = "signUp"
     LOGIN = "signInWithPassword"
     SEND_VERIFICATION_EMAIL = "sendOobCode"
-    SEND_PW_RESET_EMAIL = "None"  # TODO change
-    token = None
+    SEND_PW_RESET_EMAIL = "sendOobCode"
+    TOKEN = None
+    UID = None
 
 
+    # noinspection PyTypeChecker
     @classmethod
     def initialize(cls, by) -> bool:
         """
-        Get token from FireBase.
+        Get TOKEN and UID from FireBase.
         :return: True when succeeded, False when failed.
         """
         value = None
@@ -30,12 +37,13 @@ class FireBase:
             value = cls.create_account()
         if value == 'Failed':
             return False
-        else:
-            cls.token = value  # Allocate token
+        else:  # Allocate
+            cls.TOKEN = value[cls.ID_TOKEN]
+            cls.UID = value[cls.LOCAL_ID]
             return True
 
+
     @classmethod
-    @utils.trace
     def login(cls):
         response = cls.post(cls.LOGIN)
         if response['result'] == 'success':
@@ -63,23 +71,41 @@ class FireBase:
         elif response['value'] == 'OPERATION_NOT_ALLOWED':
             print("현재 모종의 사유로 이메일 가입이 불가능한 상태입니다. rica.projectrica@gmail.com 으로 문의해주시기 바랍니다.")
         else:  # Unexpected Error
-            raise Exception(f"Something went wrong try to login. Error message from server: {response['value']}")
+            raise Exception(f"Something went wrong during registration. Error message from server: {response['value']}")
         return 'Failed'
 
 
     @classmethod
-    def find_pw(cls, email):
-        # response = cls.post(cls.SEND_PW_RESET_EMAIL, email)
-        pass
-        # TODO make pw reset option into FiresBase.post()
-        return True
+    def verify_email(cls) -> bool:
+        response = cls.post(cls.SEND_VERIFICATION_EMAIL)
+        if response['result'] == 'success':
+            return True
+        elif response['value'] == 'INVALID_ID_TOKEN':
+            print("현재 로그인한 계정과 인증을 시도하려는 계정의 이메일이 다릅니다.")
+        elif response['value'] == 'USER_NOT_FOUND':
+            print("해당 이메일로 가입한 계정을 찾을 수 없습니다.")
+        else:  # Unexpected Error
+            raise Exception(f"Something went wrong during verification. Error message from server: {response['value']}")
+        return False
+
+
+    @classmethod
+    def reset_pw(cls, email):
+        response = cls.post(cls.SEND_PW_RESET_EMAIL, email=email)
+        if response['result'] == 'success':
+            return True
+        elif response['value'] == 'EMAIL_NOT_FOUND':
+            print("해당 이메일로 가입된 계정을 찾을 수 없습니다.")
+        else:  # Unexpected Error
+            raise Exception(f"Something went wrong during finding password. Error message from server: {response['value']}")
+        return False
 
 
     @classmethod
     def get_token(cls):
-        if cls.token is None:
+        if cls.TOKEN is None:
             raise NotImplementedError("You should allocate token before using this function. You can get token by initialize()")
-        return cls.token
+        return cls.TOKEN
 
 
     @classmethod
@@ -93,23 +119,26 @@ class FireBase:
                 'password': RICAAccount.get_rdat()['rica_account']['pw'],
                 'returnSecureToken': True
             }
-        elif query == cls.SEND_VERIFICATION_EMAIL:
+        elif query == cls.SEND_VERIFICATION_EMAIL and kwargs[cls.EMAIL] is None:
             headers = {
                 'Content-Type': 'application/json',
             }
             details = '{"requestType":"VERIFY_EMAIL","idToken":"' + cls.get_token() + '"}'  # Because get_token use SIGN_UP option, cls.get_token() does not fall into infinite call.
-        elif query == cls.SEND_PW_RESET_EMAIL:
-            # TODO make details using kwargs['email']
-            pass
-
+        elif query == cls.SEND_PW_RESET_EMAIL and kwargs[cls.EMAIL] is not None:
+            headers = {
+                'Content-Type': 'application/json',
+            }
+            details = '{"requestType":"PASSWORD_RESET","email":"' + kwargs[cls.EMAIL] + '"}'
 
         response = requests.post(f'https://identitytoolkit.googleapis.com/v1/accounts:{query}?key={key}',
                                  headers=headers, data=details)
 
         if 'error' in response.json().keys():
             return {'result': 'failed', 'value': response.json()['error']['message']}
-        if 'idToken' in response.json().keys():
-            return {'result': 'success', 'value': response.json()['idToken']}
+        elif 'idToken' in response.json().keys():
+            return {'result': 'success', 'value': response.json()}
+        elif 'kind' in response.json().keys():
+            return {'result': 'success', 'value': response.json()}
 
 
 
@@ -166,7 +195,7 @@ class RICAAccount:
     def login(cls):
         cls.get_rdat()
         if cls.rdat["rica_account"]["email"] != "" and cls.rdat["rica_account"]["pw"] != "":  # Try to login automatically
-            if FireBase.login():  # If login was successful
+            if FireBase.initialize(FireBase.BY_LOGIN):  # If login was successful
                 return
             else:
                 print("자동 로그인을 시도하던 중 오류가 발생했습니다. 다시 로그인하세요.")
@@ -203,9 +232,13 @@ class RICAAccount:
             elif opt == 2:  # Create account
                 if not FireBase.initialize(FireBase.BY_REGISTER):
                     continue
+                if FireBase.verify_email():
+                    input(f'{cls.rdat["rica_account"]["email"]}로 인증 메일이 발송되었습니다. 인증을 진행하신 후 엔터를 누르세요.')
+                else:
+                    raise RuntimeError("인증메일 발송 과정에서 알 수 없는 에러가 발생했습니다. 데이터파일 삭제 후 다시 진행해보세요.")
             elif opt == 3:  # Find pw
                 email = input("복구하고자 하는 계정의 이메일을 적으세요 => ")
-                if not FireBase.find_pw(email):
+                if not FireBase.reset_pw(email):
                     continue
                 opt = 1
                 print("해당 이메일로 비밀번호 재설정 주소가 발송되었습니다. 재설정 후 기존 RICA 계정으로 로그인하세요.")
