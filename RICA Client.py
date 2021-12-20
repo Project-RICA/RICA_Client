@@ -57,12 +57,18 @@ elif opt == 1:  # YouTube
         os.startfile("gc.bat")
 elif opt == 1234:  # Clear Data
     print("Before reset, please close all your Chrome.exe windows.")
-    if input("Type \"Yes\" to reset. This task cannot be recovered (no undo)").lower == 'yes':
+    if input("Type \"Yes\" to reset. This task cannot be recovered (no undo) => ").lower() == 'yes':
         os.startfile("gc.bat")
-        os.remove("C:\\ChromeDebugENV")
-        os.remove("chromedriver.exe")
-        os.remove("setting.rdat")
+        try:
+            os.remove("setting.rdat")
+            os.remove("chromedriver.exe")
+            os.remove("C:\\ChromeDebugENV")
+        except PermissionError:
+            print("엑세스가 거부되었습니다")
         print("Successfully deleted files.")
-        utils.sleep(3)
-        exit(0)
+    else:
+        print("Canceled")
+    utils.sleep(3)
+    exit(0)
+
 
