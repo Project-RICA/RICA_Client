@@ -2,7 +2,7 @@
 > __This license applies only to _code files_ on this repository.__ Other files of this project aren't distributed.\
 > Check the 'Abstract' and 'Open Source Policy' part.
 
-> Updated Date : 2021/12/09 v.fix
+> Updated Date : 2021/12/20 v.fix
 # 🌊 RICA 🐳
   
 
@@ -72,7 +72,7 @@ RICA operates with two engine.
     The learning method is similar to spam mail one. Collect sentences and assign each feature value, and put it.\
     Each features have each neural networks. And some features affected by preceding feature.\
     (e.g. Criticism value is decided with words and [Formalness] value.)\
-    So we should train networks following the Operation Sequence.
+    So we should train networks following the Operation Sequence.\
     The method of each features' train :
     ```
     Obfuscation : Normal(0) <-> Weird Sentence(100)
@@ -89,8 +89,8 @@ RICA operates with two engine.
     
     Advertisement : Normal(0) <-> Advertisement(100)
     ```
-    For example, when dev train Obfuscation model, the train sentences' features except Obfuscation must not be same to be flexible.
-    If dev gives only formal, positive, non-AD sentences to that model, it could be vulnerable to informal, negative, AD sentences.
+    For example, when dev train Obfuscation model, the train sentences' features except Obfuscation must not be same to be flexible.\
+    If dev gives only formal, positive, non-AD sentences to that model, it could be vulnerable to informal, negative, AD sentences.\
     And to achieve this goal(flexibility), we need various data, or this Obfuscation model's criteria will not be Obfuscation but another thing.
 
 
@@ -141,7 +141,7 @@ RICA operates with two engine.
   - #### Functions
     Trick engine can be composed various neural networks to enhance the accuracy of each type of tricks.\
     For example, handle ^^|발 with CNN, handle 28 섀킈야 with sound RNN, etc.\
-    In this occasion, GoogleTranslation's system may help us to analyze the tricks..
+    In this occasion, GoogleTranslation's system may help us to analyze the tricks..\
     It seems that they also using the pronunciation when they translate sentences.\
     So they could answer correctly in some words.\
     Also they have databases about newly coined words and slangs. (e.g. '멋졍' translated to 'cool', 'ㅇㅇ' to 'Yep')\
@@ -166,7 +166,7 @@ RICA operates with two engine.
 
 - ### 📝 Realtime Learning System (RLS)
   Realtime learning is the most important part of RICA becuase of continuously changing comment types\
-  RLS will be triggered by some type of comments.
+  RLS will be triggered by some type of comments.\
   For the accuracy of RLS and to prevent mishandling, they'll will be sent to devs.
   
   - #### RICA Engine RLS
@@ -196,7 +196,7 @@ This part shows you where RICA can exert its power, and contains the guide of th
     
   - ### 🎮 Discord
     _RICA bot will start to be developed after the first YouTube version of RICA successfully works there._\
-    _And also RICA need DB before analyzing the various chat in Discord channel. Normal talks are much complex to do it._
+    _And also RICA need DB before analyzing the various chat in Discord channel. Normal talks are much complex to do it._\
     _Comming Soon!_
     
   - ### (Will be added)
