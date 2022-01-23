@@ -16,7 +16,7 @@ import utils
 
 # Initialization
 utils.double_line(40)
-print("\n\nRICA Client\nVersion : beta 0.0\n\n")
+print("\n\nRICA Client\nVersion : 0.0.0.β\n\n")
 print("Checking new version. . .")
 Updater.check_update()
 print("Checking latest model. . .")
